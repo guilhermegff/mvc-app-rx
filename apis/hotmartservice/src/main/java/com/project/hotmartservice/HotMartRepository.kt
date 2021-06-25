@@ -30,5 +30,5 @@ class HotMartRepository(private val hotMartDataSource: HotMartDataSource) : HotM
         }
     }
 
-    override fun stores() = hotMartDataSource.stores()
+    override fun locations() = hotMartDataSource.locations()
 }

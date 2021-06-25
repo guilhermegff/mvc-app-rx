@@ -43,5 +43,5 @@ object HotMartApi : HotMartDataSource {
         service = retrofit.create(HotMartService::class.java)
     }
 
-    override fun stores() : Single<Locations> = service.stores()
+    override fun locations() : Single<Locations> = service.stores()
 }

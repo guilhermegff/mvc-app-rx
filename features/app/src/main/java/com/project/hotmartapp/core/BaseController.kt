@@ -5,7 +5,7 @@ import io.reactivex.disposables.Disposable
 
 abstract class BaseController<VIEW_CONTRACT : RootViewContract> {
     protected lateinit var viewContract : VIEW_CONTRACT
-    private var disposables = HashSet<Disposable>()
+    protected var disposables = HashSet<Disposable>()
 
     abstract fun onStart()
     abstract fun onStop()
