@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface HotMartService {
     @GET("/locations")
-    fun stores() : Single<Locations>
+    fun locations() : Single<Locations>
 }
