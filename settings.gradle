@@ -1,5 +1,3 @@
 rootProject.name = "HotMartApp"
-include ':app'
-include ':apis'
 include ':apis:hotmartservice'
-include ':features'
+include ':features:app'
