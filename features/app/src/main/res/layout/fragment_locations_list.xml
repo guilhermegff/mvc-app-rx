@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarView"
@@ -15,7 +15,21 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/locationsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/item_location"
+        tools:itemCount="15"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarView"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBarView"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomBarView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/topaz_outline"
