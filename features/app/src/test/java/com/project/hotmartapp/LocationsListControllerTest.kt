@@ -3,9 +3,9 @@ package com.project.hotmartapp
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.project.hotmartapp.core.locationslist.usecase.LocationsListUseCase
-import com.project.hotmartapp.core.locationslist.view.controller.LocationsListController
-import com.project.hotmartapp.core.locationslist.view.controller.LocationsListViewContract
+import com.project.hotmartapp.ui.locationslist.usecase.LocationsListUseCase
+import com.project.hotmartapp.ui.locationslist.view.controller.LocationsListController
+import com.project.hotmartapp.ui.locationslist.view.controller.LocationsListViewContract
 
 import org.junit.Before
 import org.junit.Test

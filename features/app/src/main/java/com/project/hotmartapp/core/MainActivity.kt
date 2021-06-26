@@ -1,7 +1,7 @@
 package com.project.hotmartapp.core
 
 import com.project.hotmartapp.R
-import com.project.hotmartapp.core.locationslist.view.controller.LocationsListFragment
+import com.project.hotmartapp.ui.locationslist.view.controller.LocationsListFragment
 
 class MainActivity : BaseActivity(), FragmentLayoutProvider {
 

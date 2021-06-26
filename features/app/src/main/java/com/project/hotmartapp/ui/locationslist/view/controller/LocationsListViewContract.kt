@@ -1,4 +1,4 @@
-package com.project.hotmartapp.core.locationslist.view.controller
+package com.project.hotmartapp.ui.locationslist.view.controller
 
 import com.project.hotmartapp.core.BaseListener
 import com.project.hotmartapp.core.ObservableViewContract

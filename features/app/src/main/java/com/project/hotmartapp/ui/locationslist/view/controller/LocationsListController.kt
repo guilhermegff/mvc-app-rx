@@ -1,12 +1,21 @@
-package com.project.hotmartapp.core.locationslist.view.controller
+package com.project.hotmartapp.ui.locationslist.view.controller
 
 import com.project.hotmartapp.core.BaseController
 import com.project.hotmartapp.core.BaseSchedulerProvider
-import com.project.hotmartapp.core.locationslist.usecase.LocationsListUseCase
+import com.project.hotmartapp.core.factories.AdapterFactory
+import com.project.hotmartapp.ui.locationslist.component.LocationViewItem
+import com.project.hotmartapp.ui.locationslist.component.LocationsAdapterListener
+import com.project.hotmartapp.ui.locationslist.ext.toLocationViewItem
+import com.project.hotmartapp.ui.locationslist.usecase.LocationsListUseCase
 import com.project.hotmartservice.model.Locations
 import timber.log.Timber
 
-class LocationsListController(private val locationsListUseCase: LocationsListUseCase, private val schedulerProvider: BaseSchedulerProvider) : BaseController<LocationsListViewContract>(), LocationsListViewContract.Listener {
+class LocationsListController(private val locationsListUseCase: LocationsListUseCase,
+                              private val schedulerProvider: BaseSchedulerProvider,
+                              adapterFactory: AdapterFactory)
+    : BaseController<LocationsListViewContract>(), LocationsListViewContract.Listener, LocationsAdapterListener {
+
+    private val locationsAdapter = adapterFactory.provideLocationsAdapter(this)
 
     override fun observeLive() {
         loadLocations()
@@ -37,7 +46,10 @@ class LocationsListController(private val locationsListUseCase: LocationsListUse
                 when {
                     it.isSuccess -> {
                         val locations = it.getOrNull() ?: Locations(arrayListOf())
-                        locations.collection.size
+                        locations.collection
+                            .map { location -> location.toLocationViewItem() }
+                            .let { newCollection -> locationsAdapter.add(newCollection as ArrayList<LocationViewItem>)
+                        }
                     }
                     it.isFailure -> {}
                 }
