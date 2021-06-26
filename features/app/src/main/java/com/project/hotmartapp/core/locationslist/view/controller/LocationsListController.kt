@@ -1,12 +1,12 @@
 package com.project.hotmartapp.core.locationslist.view.controller
 
 import com.project.hotmartapp.core.BaseController
-import com.project.hotmartapp.core.SchedulerProvider
+import com.project.hotmartapp.core.BaseSchedulerProvider
 import com.project.hotmartapp.core.locationslist.usecase.LocationsListUseCase
 import com.project.hotmartservice.model.Locations
 import timber.log.Timber
 
-class LocationsListController(private val locationsListUseCase: LocationsListUseCase, private val schedulerProvider: SchedulerProvider) : BaseController<LocationsListViewContract>(), LocationsListViewContract.Listener {
+class LocationsListController(private val locationsListUseCase: LocationsListUseCase, private val schedulerProvider: BaseSchedulerProvider) : BaseController<LocationsListViewContract>(), LocationsListViewContract.Listener {
 
     override fun observeLive() {
         loadLocations()
