@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HotMartApp</string>
+    <string name="home_toolbar_title">Home</string>
 </resources>
