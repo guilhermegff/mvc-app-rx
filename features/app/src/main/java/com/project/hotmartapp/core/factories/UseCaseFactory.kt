@@ -1,6 +1,6 @@
 package com.project.hotmartapp.core.factories
 
-import com.project.hotmartapp.core.locationslist.usecase.LocationsListUseCase
+import com.project.hotmartapp.ui.locationslist.usecase.LocationsListUseCase
 import com.project.hotmartservice.HotMartApi
 import com.project.hotmartservice.HotMartRepository
 

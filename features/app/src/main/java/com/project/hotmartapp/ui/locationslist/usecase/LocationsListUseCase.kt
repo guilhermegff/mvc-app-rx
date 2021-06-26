@@ -1,4 +1,4 @@
-package com.project.hotmartapp.core.locationslist.usecase
+package com.project.hotmartapp.ui.locationslist.usecase
 
 import com.project.hotmartapp.core.BaseUseCase
 import com.project.hotmartservice.HotMartDataSource
