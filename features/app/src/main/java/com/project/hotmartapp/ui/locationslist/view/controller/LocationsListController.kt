@@ -40,7 +40,10 @@ class LocationsListController(private val locationsListUseCase: BaseLocationsLis
         locationsListUseCase.loadLocations()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
-            .doOnSubscribe { viewContract.showLoading() }
+            .doOnSubscribe {
+                viewContract.hideViews()
+                viewContract.showLoading()
+            }
             .doFinally { viewContract.hideLoading() }
             .subscribe({
                 when {
@@ -54,6 +57,10 @@ class LocationsListController(private val locationsListUseCase: BaseLocationsLis
                 }
             }, { Timber.e(it, "loadStores: %s", it.message) })
             .run { disposables.add(this) }
+    }
+
+    override fun onErrorViewClick() {
+        loadLocations()
     }
 
     override fun onLocationClick(locationViewItem: LocationViewItem) {
