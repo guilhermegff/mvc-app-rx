@@ -8,10 +8,12 @@ interface LocationsListViewContract : ObservableViewContract<LocationsListViewCo
     interface Listener : BaseListener {
         fun loadLocations()
         fun onLocationClick(locationViewItem: LocationViewItem)
+        fun onErrorViewClick()
     }
     fun bindViews()
     fun showLoading()
     fun hideLoading()
+    fun hideViews()
     fun showLocations(locations: ArrayList<LocationViewItem>)
     fun showError()
 }
