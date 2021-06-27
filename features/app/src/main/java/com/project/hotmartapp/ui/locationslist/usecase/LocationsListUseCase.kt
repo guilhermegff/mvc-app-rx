@@ -1,13 +1,15 @@
 package com.project.hotmartapp.ui.locationslist.usecase
 
-import com.project.hotmartapp.core.BaseUseCase
 import com.project.hotmartservice.HotMartDataSource
 import com.project.hotmartservice.model.Locations
 import io.reactivex.Single
+import io.reactivex.disposables.Disposable
 
-class LocationsListUseCase(private val hotMartDataSource: HotMartDataSource) : BaseUseCase() {
+class LocationsListUseCase(private val hotMartDataSource: HotMartDataSource) : BaseLocationsListUseCase {
 
-    fun loadLocations() : Single<Result<Locations>> {
+    override var disposables = HashSet<Disposable>()
+
+    override fun loadLocations() : Single<Result<Locations>> {
         return hotMartDataSource.locations()
             .map {
                 Result.success(it)

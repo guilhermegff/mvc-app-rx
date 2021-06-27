@@ -11,4 +11,5 @@ interface LocationsListViewContract : ObservableViewContract<LocationsListViewCo
     }
     fun bindViews()
     fun showLocations(locations: ArrayList<LocationViewItem>)
+    fun showError()
 }

@@ -25,6 +25,10 @@ class LocationsListView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?, p
         locationsAdapter.add(locations)
     }
 
+    override fun showError() {
+        //TODO("Not yet implemented")
+    }
+
     override fun onLocationClick(locationViewItem: LocationViewItem) {
         listeners.forEach {
             it.onLocationClick(locationViewItem)
