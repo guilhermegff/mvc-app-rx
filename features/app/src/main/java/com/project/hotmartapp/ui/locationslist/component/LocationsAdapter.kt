@@ -39,6 +39,10 @@ class LocationsAdapter(private val collection: ArrayList<LocationViewItem>, priv
         notifyDataSetChanged()
     }
 
+    override fun onLocationClick(locationViewItem: LocationViewItem) {
+        locationsAdapterListener.onLocationClick(locationViewItem)
+    }
+
     fun registerListener(locationsAdapterListener: LocationsAdapterListener) {
         this.locationsAdapterListener = locationsAdapterListener
     }

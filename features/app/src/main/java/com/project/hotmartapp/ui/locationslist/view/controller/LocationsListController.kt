@@ -2,6 +2,7 @@ package com.project.hotmartapp.ui.locationslist.view.controller
 
 import com.project.hotmartapp.core.BaseController
 import com.project.hotmartapp.core.BaseSchedulerProvider
+import com.project.hotmartapp.core.ScreenNavigator
 import com.project.hotmartapp.ui.locationslist.component.LocationViewItem
 import com.project.hotmartapp.ui.locationslist.component.LocationsAdapterListener
 import com.project.hotmartapp.ui.locationslist.ext.toLocationViewItem
@@ -10,8 +11,9 @@ import com.project.hotmartservice.model.Locations
 import timber.log.Timber
 
 class LocationsListController(private val locationsListUseCase: LocationsListUseCase,
-                              private val schedulerProvider: BaseSchedulerProvider)
-    : BaseController<LocationsListViewContract>(), LocationsListViewContract.Listener, LocationsAdapterListener {
+                              private val schedulerProvider: BaseSchedulerProvider,
+                              private val screenNavigator: ScreenNavigator
+) : BaseController<LocationsListViewContract>(), LocationsListViewContract.Listener, LocationsAdapterListener {
 
     override fun observeLive() {
         loadLocations()
@@ -50,5 +52,9 @@ class LocationsListController(private val locationsListUseCase: LocationsListUse
                 }
             }, { Timber.e(it, "loadStores: %s", it.message) })
             .run { disposables.add(this) }
+    }
+
+    override fun onLocationClick(locationViewItem: LocationViewItem) {
+        screenNavigator.toDetailScreen(locationViewItem)
     }
 }

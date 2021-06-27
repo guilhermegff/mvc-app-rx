@@ -29,5 +29,11 @@ class LocationItemView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?)
         type.text = locationViewItem.type
         ratingStars.rating = locationViewItem.rating.toFloat()
         ratingScore.text = locationViewItem.rating.toString()
+
+        rootView.setOnClickListener {
+            listeners.forEach {
+                it.onLocationClick(locationViewItem)
+            }
+        }
     }
 }
