@@ -10,6 +10,8 @@ interface LocationsListViewContract : ObservableViewContract<LocationsListViewCo
         fun onLocationClick(locationViewItem: LocationViewItem)
     }
     fun bindViews()
+    fun showLoading()
+    fun hideLoading()
     fun showLocations(locations: ArrayList<LocationViewItem>)
     fun showError()
 }

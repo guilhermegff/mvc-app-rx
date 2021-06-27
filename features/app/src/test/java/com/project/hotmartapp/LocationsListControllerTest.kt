@@ -19,54 +19,79 @@ class LocationsListControllerTest {
         private val locationViewItem = LocationViewItem(0, "", "", "", 0.0, "")
 
         private val viewContract = mock<LocationsListViewContract>()
+        private val viewContractForFailure = mock<LocationsListViewContract>()
         private val screenNavigator = mock<StubScreenNavigator>()
 
-        private lateinit var locationsListUseCase : BaseLocationsListUseCase
-        private lateinit var SUT : LocationsListController
+        private lateinit var successLocationsListUseCase : BaseLocationsListUseCase
+        private lateinit var failureLocationsListUseCase : BaseLocationsListUseCase
+        private lateinit var controller : LocationsListController
+        private lateinit var failureController : LocationsListController
 
         @BeforeClass
         @JvmStatic
         fun setup() {
-            locationsListUseCase = SuccessStubUseCase()
-            SUT = LocationsListController(locationsListUseCase, stubSchedulerProvider, screenNavigator)
-            SUT.registerListener(viewContract)
+            successLocationsListUseCase = SuccessStubUseCase()
+            failureLocationsListUseCase = FailureStubUseCase()
+
+            //ObserveLive runs on controller creation and calls loadLocations()
+            controller = LocationsListController(successLocationsListUseCase, stubSchedulerProvider, screenNavigator)
+            failureController= LocationsListController(failureLocationsListUseCase, stubSchedulerProvider, screenNavigator)
+
+            controller.registerListener(viewContract)
+            failureController.registerListener(viewContractForFailure)
         }
     }
 
     @Test
     fun registerListener_onControllerCreation_calledOnce() {
-        verify(viewContract, times(1)).registerListener(SUT)
+        verify(viewContract, times(1)).registerListener(controller)
     }
 
     @Test
     fun registerListener_onControllerStart_calledTwoTimes() {
-        SUT.onStart()
-        verify(viewContract, times(2)).registerListener(SUT)
+        controller.onStart()
+        verify(viewContract, times(2)).registerListener(controller)
     }
 
     @Test
     fun unregisterListener_onControllerStop_calledOnce() {
-        SUT.onStop()
-        verify(viewContract, times(1)).unregisterListener(SUT)
+        controller.onStop()
+        verify(viewContract, times(1)).unregisterListener(controller)
     }
 
     @Test
     fun toDetailScreen_onItemClick_calledOnce() {
-        SUT.onLocationClick(locationViewItem)
+        controller.onLocationClick(locationViewItem)
         verify(screenNavigator, times(1)).toDetailScreen(locationViewItem)
     }
 
     @Test
+    fun showLoading_onSubscriptionWithSuccessUseCase_callsOnce() {
+        verify(viewContract, times(1)).showLoading()
+    }
+
+    @Test
+    fun hideLoading_onFinallyWithSuccessUseCase_callsOnce() {
+        verify(viewContract, times(1)).hideLoading()
+    }
+
+    @Test
     fun showLocations_onSuccessLoadLocations_callsOnce() {
-        //ObserveLive runs on SUT creation
         verify(viewContract, times(1)).showLocations(arrayListOf())
     }
 
     @Test
+    fun showLoading_onSubscriptionWithFailureUseCase_callsOnce() {
+        verify(viewContractForFailure, times(1)).showLoading()
+    }
+
+    @Test
+    fun hideLoading_onFinallyWithFailureUseCase_callsOnce() {
+        verify(viewContractForFailure, times(1)).hideLoading()
+    }
+
+    @Test
     fun showError_onFailureLoadLocations_callsOnce() {
-        locationsListUseCase = FailureStubUseCase()
-        SUT = LocationsListController(locationsListUseCase, stubSchedulerProvider, screenNavigator)
-        SUT.registerListener(viewContract)
-        verify(viewContract, times(1)).showError()
+        verify(viewContractForFailure, times(1)).showError()
     }
 }
