@@ -19,7 +19,6 @@ class LocationsListFragment : BaseFragment<LocationsListViewContract, LocationsL
             true -> requireActivity() as ScreenNavigatorListener
             false -> throw NotImplementedError("${this.requireActivity().localClassName} Must implement ${ScreenNavigatorListener::class.java}.")
         }
-        requireActivity() as ScreenNavigatorListener
     }
 
     override val appProvider by lazy { AppProvider(requireActivity() as AppCompatActivity, listener) }
