@@ -1,5 +1,8 @@
 package com.project.hotmartservice
 
+import com.project.hotmartservice.model.Establishment
+import io.reactivex.Single
+
 class HotMartRepository(private val hotMartDataSource: HotMartDataSource) : HotMartDataSource {
 
     companion object {
@@ -31,4 +34,5 @@ class HotMartRepository(private val hotMartDataSource: HotMartDataSource) : HotM
     }
 
     override fun locations() = hotMartDataSource.locations()
+    override fun establishment(id: String) = hotMartDataSource.establishment(id)
 }

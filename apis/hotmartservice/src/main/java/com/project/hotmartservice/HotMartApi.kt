@@ -2,6 +2,7 @@ package com.project.hotmartservice
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import com.project.hotmartservice.model.Establishment
 import com.project.hotmartservice.model.Locations
 import io.reactivex.Single
 import okhttp3.OkHttpClient
@@ -44,4 +45,6 @@ object HotMartApi : HotMartDataSource {
     }
 
     override fun locations() : Single<Locations> = service.locations()
+
+    override fun establishment(id: String) : Single<Establishment> = service.establishment(id)
 }
