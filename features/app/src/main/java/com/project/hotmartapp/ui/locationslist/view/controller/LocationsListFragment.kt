@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.project.hotmartapp.core.BaseFragment
 import com.project.hotmartapp.core.FragmentLayoutProvider
+import com.project.hotmartapp.core.factories.AdapterFactory
 import com.project.hotmartapp.core.factories.AppProvider
 import com.project.hotmartapp.core.factories.ControllerFactory
 
@@ -15,7 +16,9 @@ class LocationsListFragment : BaseFragment<LocationsListViewContract, LocationsL
 
     override val appProvider by lazy { AppProvider(requireActivity() as AppCompatActivity, (requireActivity() as FragmentLayoutProvider).fragmentFrame()) }
 
-    override val viewContract by lazy { appProvider.screenViewFactory.provideLocationsListScreenView(view?.parent as ViewGroup?) }
+    private val adapterFactory by lazy { AdapterFactory(appProvider.adapterViewFactory)}
+
+    override val viewContract by lazy { appProvider.screenViewFactory.provideLocationsListScreenView(view?.parent as ViewGroup?, adapterFactory.provideLocationsAdapter()) }
 
     override val controllerFactory by lazy { ControllerFactory(appProvider) }
 
