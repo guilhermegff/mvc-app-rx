@@ -7,7 +7,7 @@ import io.reactivex.SingleObserver
 
 class StubApi : HotMartDataSource {
 
-    override fun locations(): Single<Locations> = SingleImpl()
+    override fun locations(): Single<Locations> = SingleImpl().map { Locations(arrayListOf()) }
 
     inner class SingleImpl : Single<Locations>() {
         override fun subscribeActual(observer: SingleObserver<in Locations>) {}

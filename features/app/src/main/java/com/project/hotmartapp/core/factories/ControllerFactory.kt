@@ -5,6 +5,6 @@ import com.project.hotmartapp.ui.locationslist.view.controller.LocationsListCont
 class ControllerFactory(private val appProvider: AppProvider) {
     fun provideLocationsListController() = LocationsListController(
         appProvider.useCaseFactory.provideLocationsListUseCase(),
-        appProvider.schedulerProvider,
-        AdapterFactory(appProvider.adapterViewFactory))
+        appProvider.schedulerProvider
+    )
 }

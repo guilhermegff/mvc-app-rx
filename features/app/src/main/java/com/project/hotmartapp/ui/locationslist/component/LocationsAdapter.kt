@@ -4,8 +4,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.hotmartapp.core.factories.AdapterViewFactory
 
-class LocationsAdapter(private val collection: ArrayList<LocationViewItem>, private val locationAdapterListener : LocationsAdapterListener, private val adapterViewFactory: AdapterViewFactory)
+class LocationsAdapter(private val collection: ArrayList<LocationViewItem>, private val adapterViewFactory: AdapterViewFactory)
     : RecyclerView.Adapter<LocationsAdapter.ViewHolder>(), LocationItemViewContract.Listener {
+
+    private lateinit var locationsAdapterListener : LocationsAdapterListener
 
     inner class ViewHolder(private val locationItemViewContract: LocationItemViewContract) :
         RecyclerView.ViewHolder(locationItemViewContract.rootView) {
@@ -35,5 +37,9 @@ class LocationsAdapter(private val collection: ArrayList<LocationViewItem>, priv
     fun clear() {
         collection.clear()
         notifyDataSetChanged()
+    }
+
+    fun registerListener(locationsAdapterListener: LocationsAdapterListener) {
+        this.locationsAdapterListener = locationsAdapterListener
     }
 }
