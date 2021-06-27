@@ -2,17 +2,17 @@ package com.project.hotmartapp.ui.locationslist.view.controller
 
 import com.project.hotmartapp.core.BaseController
 import com.project.hotmartapp.core.BaseSchedulerProvider
-import com.project.hotmartapp.core.ScreenNavigator
+import com.project.hotmartapp.core.BaseScreenNavigator
 import com.project.hotmartapp.ui.locationslist.component.LocationViewItem
 import com.project.hotmartapp.ui.locationslist.component.LocationsAdapterListener
 import com.project.hotmartapp.ui.locationslist.ext.toLocationViewItem
-import com.project.hotmartapp.ui.locationslist.usecase.LocationsListUseCase
+import com.project.hotmartapp.ui.locationslist.usecase.BaseLocationsListUseCase
 import com.project.hotmartservice.model.Locations
 import timber.log.Timber
 
-class LocationsListController(private val locationsListUseCase: LocationsListUseCase,
+class LocationsListController(private val locationsListUseCase: BaseLocationsListUseCase,
                               private val schedulerProvider: BaseSchedulerProvider,
-                              private val screenNavigator: ScreenNavigator
+                              private val screenNavigator: BaseScreenNavigator
 ) : BaseController<LocationsListViewContract>(), LocationsListViewContract.Listener, LocationsAdapterListener {
 
     override fun observeLive() {
@@ -48,7 +48,7 @@ class LocationsListController(private val locationsListUseCase: LocationsListUse
                             .map { location -> location.toLocationViewItem() }
                             .let { newCollection -> viewContract.showLocations(newCollection as ArrayList<LocationViewItem>) }
                     }
-                    it.isFailure -> {}
+                    it.isFailure -> { viewContract.showError() }
                 }
             }, { Timber.e(it, "loadStores: %s", it.message) })
             .run { disposables.add(this) }
