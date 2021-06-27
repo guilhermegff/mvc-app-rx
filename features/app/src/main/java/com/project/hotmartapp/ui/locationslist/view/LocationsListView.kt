@@ -24,4 +24,10 @@ class LocationsListView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?, p
         locationsAdapter.registerListener(this)
         locationsAdapter.add(locations)
     }
+
+    override fun onLocationClick(locationViewItem: LocationViewItem) {
+        listeners.forEach {
+            it.onLocationClick(locationViewItem)
+        }
+    }
 }
