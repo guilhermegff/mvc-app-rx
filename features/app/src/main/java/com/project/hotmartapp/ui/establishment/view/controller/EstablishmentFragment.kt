@@ -36,7 +36,12 @@ class EstablishmentFragment : BaseFragment<EstablishmentViewContract, Establishm
 
     private val adapterFactory by lazy { AdapterFactory(appProvider.adapterViewFactory) }
 
-    override val viewContract by lazy { appProvider.screenViewFactory.provideEstablishmentScreenView(view?.parent as ViewGroup?) }
+    override val viewContract by lazy {
+        appProvider.screenViewFactory.provideEstablishmentScreenView(
+            view?.parent as ViewGroup?,
+            adapterFactory.providePicturesAdapter()
+        )
+    }
 
     override val controllerFactory by lazy { ControllerFactory(appProvider) }
 

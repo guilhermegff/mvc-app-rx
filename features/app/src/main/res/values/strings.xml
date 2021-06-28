@@ -7,6 +7,7 @@
     <string name="toolbarImage_description">Imagem do estabelecimento</string>
     <string name="back_button_description">Botão para voltar</string>
     <string name="share_button_description">Botão para compartilhar</string>
+    <string name="picture_description">Foto ilustrativa</string>
     <string name="pictures_text">Fotos</string>
     <string name="about_text">Sobre</string>
     <string name="reviews_text">Reviews</string>
