@@ -36,7 +36,7 @@ class LocationsListController(private val locationsListUseCase: BaseLocationsLis
         //TODO("Not yet implemented")
     }
 
-    override fun loadLocations() {
+    private fun loadLocations() {
         locationsListUseCase.loadLocations()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
