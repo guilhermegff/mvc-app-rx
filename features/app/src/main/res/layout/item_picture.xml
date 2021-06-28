@@ -11,6 +11,7 @@
 
     <ImageView
         android:id="@+id/thumbnailView"
+        android:contentDescription="@string/picture_description"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:scaleType="centerCrop"
