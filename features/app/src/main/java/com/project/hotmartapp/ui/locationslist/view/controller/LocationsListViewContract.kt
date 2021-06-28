@@ -6,7 +6,6 @@ import com.project.hotmartapp.ui.locationslist.component.LocationViewItem
 
 interface LocationsListViewContract : ObservableViewContract<LocationsListViewContract.Listener> {
     interface Listener : BaseListener {
-        fun loadLocations()
         fun onLocationClick(locationViewItem: LocationViewItem)
         fun onErrorViewClick()
     }
