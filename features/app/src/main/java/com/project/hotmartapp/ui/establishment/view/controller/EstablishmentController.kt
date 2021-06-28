@@ -2,17 +2,17 @@ package com.project.hotmartapp.ui.establishment.view.controller
 
 import com.project.hotmartapp.core.BaseController
 import com.project.hotmartapp.core.BaseSchedulerProvider
-import com.project.hotmartapp.core.BaseScreenNavigator
 import com.project.hotmartapp.ui.establishment.usecase.EstablishmentUseCase
 import timber.log.Timber
 
-class EstablishmentController(private val establishmentUseCase: EstablishmentUseCase,
-                                   private val schedulerProvider: BaseSchedulerProvider,
-                                   private val screenNavigator: BaseScreenNavigator
+class EstablishmentController(
+    private val establishmentUseCase: EstablishmentUseCase,
+    private val schedulerProvider: BaseSchedulerProvider,
+    private val id: String
 ) : BaseController<EstablishmentViewContract>(), EstablishmentViewContract.Listener {
 
     override fun observeLive() {
-        loadEstablishment("2")
+        loadEstablishment(id)
     }
 
     override fun registerListener(viewContract: EstablishmentViewContract) {

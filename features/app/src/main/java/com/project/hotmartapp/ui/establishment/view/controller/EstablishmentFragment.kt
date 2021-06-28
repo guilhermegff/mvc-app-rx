@@ -1,5 +1,6 @@
 package com.project.hotmartapp.ui.establishment.view.controller
 
+import android.os.Bundle
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.project.hotmartapp.core.BaseFragment
@@ -11,8 +12,18 @@ import com.project.hotmartapp.core.factories.ControllerFactory
 class EstablishmentFragment : BaseFragment<EstablishmentViewContract, EstablishmentController, AppProvider, ControllerFactory>() {
 
     companion object {
-        fun newInstance() = EstablishmentFragment()
+        private const val EXTRA_ESTABLISHMENT_ID = "EXTRA_ESTABLISHMENT_ID"
+
+        fun newInstance(id: String) : EstablishmentFragment {
+            return EstablishmentFragment().apply {
+                arguments = Bundle().apply {
+                    this.putString(EXTRA_ESTABLISHMENT_ID, id)
+                }
+            }
+        }
     }
+
+    private lateinit var id: String
 
     private val listener by lazy {
         when(requireActivity() is ScreenNavigatorListener) {
@@ -29,9 +40,9 @@ class EstablishmentFragment : BaseFragment<EstablishmentViewContract, Establishm
 
     override val controllerFactory by lazy { ControllerFactory(appProvider) }
 
-    override val controller by lazy { controllerFactory.provideEstablishmentController()}
+    override val controller by lazy { controllerFactory.provideEstablishmentController(id)}
 
     override fun initData() {
-        //TODO("Not yet implemented")
+        id = arguments?.getString(EXTRA_ESTABLISHMENT_ID)!!
     }
 }

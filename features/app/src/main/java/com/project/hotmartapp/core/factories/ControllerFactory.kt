@@ -9,9 +9,9 @@ class ControllerFactory(private val appProvider: AppProvider) {
         appProvider.schedulerProvider,
         appProvider.screenNavigator
     )
-    fun provideEstablishmentController() = EstablishmentController(
+    fun provideEstablishmentController(id: String) = EstablishmentController(
         appProvider.useCaseFactory.provideEstablishmentUseCase(),
         appProvider.schedulerProvider,
-        appProvider.screenNavigator
+        id
     )
 }

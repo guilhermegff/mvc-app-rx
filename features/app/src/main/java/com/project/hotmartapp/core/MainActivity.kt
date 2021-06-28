@@ -1,6 +1,5 @@
 package com.project.hotmartapp.core
 
-import android.widget.Toast
 import com.project.hotmartapp.R
 import com.project.hotmartapp.ui.establishment.view.controller.EstablishmentFragment
 import com.project.hotmartapp.ui.locationslist.component.LocationViewItem
@@ -8,15 +7,13 @@ import com.project.hotmartapp.ui.locationslist.view.controller.LocationsListFrag
 
 class MainActivity : BaseActivity(), FragmentLayoutProvider, ScreenNavigatorListener {
 
-    private val locationsListFragment by lazy { LocationsListFragment.newInstance() }
-    private val establishmentFragment by lazy { EstablishmentFragment.newInstance() }
-
     override fun fragmentFrame() = R.id.contentView
 
     override fun initViews() { setContentView(R.layout.activity_main) }
 
     override fun onResume() {
         super.onResume()
+        val locationsListFragment = LocationsListFragment.newInstance()
         supportFragmentManager.beginTransaction().apply {
             replace(fragmentFrame(), locationsListFragment, locationsListFragment.javaClass.simpleName)
             setPrimaryNavigationFragment(locationsListFragment)
@@ -24,6 +21,7 @@ class MainActivity : BaseActivity(), FragmentLayoutProvider, ScreenNavigatorList
     }
 
     override fun openDetailScreen(locationViewItem: LocationViewItem) {
+        val establishmentFragment = EstablishmentFragment.newInstance(locationViewItem.id.toString())
         supportFragmentManager.beginTransaction().apply {
             replace(fragmentFrame(), establishmentFragment, establishmentFragment.javaClass.simpleName)
             setPrimaryNavigationFragment(establishmentFragment)
