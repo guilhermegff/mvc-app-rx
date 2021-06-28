@@ -39,8 +39,9 @@ class EstablishmentController(
             .subscribe({
                 when {
                     it.isSuccess -> {
-                        val establishment = it.map { establishment -> establishment }
-                        Timber.e("establishment: %s", establishment )
+                        it.getOrNull()?.let { establishment ->
+                            viewContract.showEstablishment(establishment)
+                        }
                     }
                     it.isFailure -> {  }
                 }
