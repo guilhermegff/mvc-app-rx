@@ -106,7 +106,6 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/descriptionComponentView"
                 android:layout_marginStart="26dp"
-                android:layout_marginTop="60dp"
                 android:visibility="visible"
                 >
 
@@ -128,6 +127,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal"
+                    tools:itemCount="15"
+                    tools:listitem="@layout/item_picture"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/picturesTitleView" />
