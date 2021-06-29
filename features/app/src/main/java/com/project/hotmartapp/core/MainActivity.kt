@@ -28,4 +28,8 @@ class MainActivity : BaseActivity(), FragmentLayoutProvider, ScreenNavigatorList
             addToBackStack(establishmentFragment.javaClass.simpleName)
         }.commitAllowingStateLoss()
     }
+
+    override fun backToLastScreen() {
+        super.onBackPressed()
+    }
 }

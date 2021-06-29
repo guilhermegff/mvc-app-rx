@@ -3,6 +3,7 @@ package com.project.hotmartapp.ui.establishment.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
@@ -26,6 +27,16 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
     EstablishmentViewContract, PicturesAdapterListener {
 
     private val moreReviewsComponent = rootView.findViewById<ConstraintLayout>(R.id.moreReviewsComponent)
+
+    override fun bindBackButton() {
+        rootView.findViewById<ImageView>(R.id.arrowBackView).also { imageView ->
+            imageView.setOnClickListener {
+                listeners.forEach {
+                    it.onBackButtonClick()
+                }
+            }
+        }
+    }
 
     override fun showEstablishment(establishmentViewItem: EstablishmentViewItem) {
         val title = rootView.findViewById<TextView>(R.id.establishmentTitleView)
