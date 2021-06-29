@@ -1,4 +1,4 @@
-package com.project.hotmartapp.ui.establishment.component
+package com.project.hotmartapp.ui.establishment.component.pictures
 
 import com.project.hotmartapp.core.BaseListener
 import com.project.hotmartapp.core.ObservableViewContract
