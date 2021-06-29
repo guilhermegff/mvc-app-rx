@@ -3,7 +3,6 @@ package com.project.hotmartapp.ui.locationslist.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.project.hotmartapp.R
@@ -30,11 +29,6 @@ class LocationsListView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?, p
         progressBar.visibility = View.VISIBLE
     }
 
-    override fun hideViews() {
-        errorView.visibility = View.GONE
-        recyclerView.visibility = View.GONE
-    }
-
     override fun hideLoading() {
         progressBar.visibility = View.GONE
     }
@@ -53,6 +47,7 @@ class LocationsListView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?, p
     }
 
     override fun doAction() {
+        errorView.visibility = View.GONE
         listeners.forEach {
             it.onErrorViewClick()
         }

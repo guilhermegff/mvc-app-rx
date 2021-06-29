@@ -43,6 +43,8 @@ class EstablishmentController(
         establishmentUseCase.loadEstablishment(id)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
+            .doOnSubscribe { viewContract.showLoading() }
+            .doFinally { viewContract.hideLoading() }
             .subscribe({
                 when {
                     it.isSuccess -> {
@@ -58,7 +60,7 @@ class EstablishmentController(
                             viewContract.showPictures()
                         }
                     }
-                    it.isFailure -> {  }
+                    it.isFailure -> { viewContract.showError() }
                 }
             }, { Timber.e(it, "loadEstablishment: %s", it.message) })
             .run { disposables.add(this) }
@@ -70,6 +72,10 @@ class EstablishmentController(
 
     override fun onBackButtonClick() {
         screenNavigator.toLastScreen()
+    }
+
+    override fun onErrorViewClick() {
+        loadEstablishment(id)
     }
 
     private fun createReviewItems() : ArrayList<ReviewViewItem> {

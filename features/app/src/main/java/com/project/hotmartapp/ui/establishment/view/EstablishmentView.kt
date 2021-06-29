@@ -3,13 +3,13 @@ package com.project.hotmartapp.ui.establishment.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.hotmartapp.R
+import com.project.hotmartapp.core.ErrorView
+import com.project.hotmartapp.core.ErrorViewListener
 import com.project.hotmartapp.core.ObservableView
 import com.project.hotmartapp.ui.establishment.component.establishment.EstablishmentViewItem
 import com.project.hotmartapp.ui.establishment.component.pictures.PictureViewItem
@@ -24,10 +24,12 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
                         private val picturesAdapter: PicturesAdapter,
                         private val reviewsAdapter: ReviewsAdapter)
     : ObservableView<EstablishmentViewContract.Listener>(layoutInflater, viewGroup, R.layout.fragment_establishment),
-    EstablishmentViewContract, PicturesAdapterListener {
+    EstablishmentViewContract, PicturesAdapterListener, ErrorViewListener {
 
     private val moreReviewsComponent = rootView.findViewById<ConstraintLayout>(R.id.moreReviewsComponent)
     private val moreReviewsView = rootView.findViewById<TextView>(R.id.moreReviewsView)
+    private val progressBar = rootView.findViewById<ProgressBar>(R.id.progressBarView)
+    private val errorView = rootView.findViewById<ErrorView>(R.id.errorView)
 
     override fun bindBackButton() {
         rootView.findViewById<ImageView>(R.id.arrowBackView).let { imageView ->
@@ -47,7 +49,28 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
         }
     }
 
+    override fun showLoading() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        progressBar.visibility = View.GONE
+    }
+
+    override fun showError() {
+        errorView.errorViewListener = this
+        errorView.visibility = View.VISIBLE
+    }
+
+    override fun doAction() {
+        errorView.visibility = View.GONE
+        listeners.forEach {
+            it.onErrorViewClick()
+        }
+    }
+
     override fun showEstablishment(establishmentViewItem: EstablishmentViewItem) {
+        rootView.findViewById<NestedScrollView>(R.id.nestedComponentView).visibility = View.VISIBLE
         rootView.findViewById<TextView>(R.id.establishmentTitleView).text = establishmentViewItem.title
         rootView.findViewById<RatingBar>(R.id.ratingStarsView).rating = establishmentViewItem.rating.toFloat()
         rootView.findViewById<TextView>(R.id.ratingScoreView).text = establishmentViewItem.rating.toString()
