@@ -1,4 +1,4 @@
-package com.project.hotmartapp.ui.establishment.component
+package com.project.hotmartapp.ui.establishment.component.pictures
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

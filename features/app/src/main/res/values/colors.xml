@@ -12,4 +12,6 @@
     <color name="black_10">#19000000</color>
     <color name="golden_yellow">#ffc71e</color>
     <color name="transparent">#00ffffff</color>
+    <color name="salmon">#A3FF679A</color>
+    <color name="orange">#C3FF802B</color>
 </resources>

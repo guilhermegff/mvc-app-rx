@@ -39,7 +39,8 @@ class EstablishmentFragment : BaseFragment<EstablishmentViewContract, Establishm
     override val viewContract by lazy {
         appProvider.screenViewFactory.provideEstablishmentScreenView(
             view?.parent as ViewGroup?,
-            adapterFactory.providePicturesAdapter()
+            adapterFactory.providePicturesAdapter(),
+            adapterFactory.provideReviewsAdapter()
         )
     }
 
