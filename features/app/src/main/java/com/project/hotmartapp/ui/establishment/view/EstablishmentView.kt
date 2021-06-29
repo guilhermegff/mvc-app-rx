@@ -27,9 +27,10 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
     EstablishmentViewContract, PicturesAdapterListener {
 
     private val moreReviewsComponent = rootView.findViewById<ConstraintLayout>(R.id.moreReviewsComponent)
+    private val moreReviewsView = rootView.findViewById<TextView>(R.id.moreReviewsView)
 
     override fun bindBackButton() {
-        rootView.findViewById<ImageView>(R.id.arrowBackView).also { imageView ->
+        rootView.findViewById<ImageView>(R.id.arrowBackView).let { imageView ->
             imageView.setOnClickListener {
                 listeners.forEach {
                     it.onBackButtonClick()
@@ -38,40 +39,39 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
         }
     }
 
-    override fun showEstablishment(establishmentViewItem: EstablishmentViewItem) {
-        val title = rootView.findViewById<TextView>(R.id.establishmentTitleView)
-        title.text = establishmentViewItem.title
-
-        val ratingStars = rootView.findViewById<RatingBar>(R.id.ratingStarsView)
-        ratingStars.rating = establishmentViewItem.rating.toFloat()
-
-        val ratingScore = rootView.findViewById<TextView>(R.id.ratingScoreView)
-        ratingScore.text = establishmentViewItem.rating.toString()
-    }
-
-    override fun showPictures() {
-        val picturesCollection = rootView.findViewById<RecyclerView>(R.id.picturesCollectionView)
-        picturesAdapter.registerListener(this)
-        picturesAdapter.add(createItems())
-
-        picturesCollection.adapter = picturesAdapter
-
-        picturesCollection.visibility = View.VISIBLE
-    }
-
-    override fun showReviews(reviews: ArrayList<ReviewViewItem>, total: Int) {
-        val moreReviewsView = rootView.findViewById<TextView>(R.id.moreReviewsView)
-        moreReviewsView.text = rootView.resources.getString(R.string.more_reviews, total)
+    override fun bindReviewsButton() {
         moreReviewsComponent.setOnClickListener {
             listeners.forEach {
                 it.onMoreReviewsClick()
             }
         }
+    }
 
-        val reviewsCollection = rootView.findViewById<RecyclerView>(R.id.reviewsCollectionView)
+    override fun showEstablishment(establishmentViewItem: EstablishmentViewItem) {
+        rootView.findViewById<TextView>(R.id.establishmentTitleView).text = establishmentViewItem.title
+        rootView.findViewById<RatingBar>(R.id.ratingStarsView).rating = establishmentViewItem.rating.toFloat()
+        rootView.findViewById<TextView>(R.id.ratingScoreView).text = establishmentViewItem.rating.toString()
+    }
+
+    override fun showPictures() {
+        rootView.findViewById<RecyclerView>(R.id.picturesCollectionView).let { recycler ->
+            recycler.adapter = picturesAdapter
+            recycler.visibility = View.VISIBLE
+        }
+        picturesAdapter.registerListener(this)
+        picturesAdapter.add(createItems())
+    }
+
+    override fun showReviewsCount(total: Int) {
+        moreReviewsView.text = rootView.context.resources.getString(R.string.more_reviews, total)
+    }
+
+    override fun showReviews(reviews: ArrayList<ReviewViewItem>) {
+        rootView.findViewById<RecyclerView>(R.id.reviewsCollectionView).let { recycler ->
+            recycler.adapter = reviewsAdapter
+            recycler.visibility = View.VISIBLE
+        }
         reviewsAdapter.add(reviews)
-        reviewsCollection.adapter = reviewsAdapter
-        reviewsCollection.visibility = View.VISIBLE
     }
 
     override fun showAllReviews(reviews: ArrayList<ReviewViewItem>) {
