@@ -40,10 +40,7 @@ class LocationsListController(private val locationsListUseCase: BaseLocationsLis
         locationsListUseCase.loadLocations()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
-            .doOnSubscribe {
-                viewContract.hideViews()
-                viewContract.showLoading()
-            }
+            .doOnSubscribe { viewContract.showLoading() }
             .doFinally { viewContract.hideLoading() }
             .subscribe({
                 when {

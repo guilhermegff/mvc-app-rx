@@ -9,6 +9,7 @@ interface EstablishmentViewContract : ObservableViewContract<EstablishmentViewCo
     interface Listener : BaseListener {
         fun onMoreReviewsClick()
         fun onBackButtonClick()
+        fun onErrorViewClick()
     }
 
     fun showEstablishment(establishmentViewItem: EstablishmentViewItem)
@@ -16,6 +17,9 @@ interface EstablishmentViewContract : ObservableViewContract<EstablishmentViewCo
     fun showReviewsCount(total: Int)
     fun showReviews(reviews: ArrayList<ReviewViewItem>)
     fun showAllReviews(reviews: ArrayList<ReviewViewItem>)
+    fun showLoading()
+    fun showError()
+    fun hideLoading()
     fun bindBackButton()
     fun bindReviewsButton()
 }
