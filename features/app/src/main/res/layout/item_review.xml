@@ -53,11 +53,12 @@
         android:id="@+id/reviewView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="1dp"
-        android:text="Written review, long text"
+        android:text="Written review, long text Written review, long text Written review, long text Written review, long textWritten review, long text"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/titleView"
+        app:layout_constraintStart_toEndOf="@+id/avatarView"
         app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
     <TextView

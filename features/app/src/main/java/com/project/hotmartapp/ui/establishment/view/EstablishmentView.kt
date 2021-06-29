@@ -3,16 +3,21 @@ package com.project.hotmartapp.ui.establishment.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.project.hotmartapp.R
 import com.project.hotmartapp.core.ObservableView
+import com.project.hotmartapp.ui.establishment.component.establishment.EstablishmentViewItem
 import com.project.hotmartapp.ui.establishment.component.pictures.PictureViewItem
 import com.project.hotmartapp.ui.establishment.component.pictures.PicturesAdapter
 import com.project.hotmartapp.ui.establishment.component.pictures.PicturesAdapterListener
 import com.project.hotmartapp.ui.establishment.component.reviews.ReviewViewItem
 import com.project.hotmartapp.ui.establishment.component.reviews.ReviewsAdapter
 import com.project.hotmartapp.ui.establishment.view.controller.EstablishmentViewContract
-import com.project.hotmartservice.model.Establishment
+import timber.log.Timber
 
 class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
                         private val picturesAdapter: PicturesAdapter,
@@ -20,24 +25,53 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
     : ObservableView<EstablishmentViewContract.Listener>(layoutInflater, viewGroup, R.layout.fragment_establishment),
     EstablishmentViewContract, PicturesAdapterListener {
 
-    override fun showEstablishment(establishment: Establishment) {
+    private val moreReviewsComponent = rootView.findViewById<ConstraintLayout>(R.id.moreReviewsComponent)
+
+    override fun showEstablishment(establishmentViewItem: EstablishmentViewItem) {
+        val title = rootView.findViewById<TextView>(R.id.establishmentTitleView)
+        title.text = establishmentViewItem.title
+
+        val ratingStars = rootView.findViewById<RatingBar>(R.id.ratingStarsView)
+        ratingStars.rating = establishmentViewItem.rating.toFloat()
+
+        val ratingScore = rootView.findViewById<TextView>(R.id.ratingScoreView)
+        ratingScore.text = establishmentViewItem.rating.toString()
+    }
+
+    override fun showPictures() {
         val picturesCollection = rootView.findViewById<RecyclerView>(R.id.picturesCollectionView)
+        picturesAdapter.registerListener(this)
         picturesAdapter.add(createItems())
 
         picturesCollection.adapter = picturesAdapter
 
         picturesCollection.visibility = View.VISIBLE
+    }
+
+    override fun showReviews(reviews: ArrayList<ReviewViewItem>, total: Int) {
+        val moreReviewsView = rootView.findViewById<TextView>(R.id.moreReviewsView)
+        moreReviewsView.text = rootView.resources.getString(R.string.more_reviews, total)
+        moreReviewsComponent.setOnClickListener {
+            listeners.forEach {
+                it.onMoreReviewsClick()
+            }
+        }
 
         val reviewsCollection = rootView.findViewById<RecyclerView>(R.id.reviewsCollectionView)
-        reviewsAdapter.add(createReviewItems())
-
+        reviewsAdapter.add(reviews)
         reviewsCollection.adapter = reviewsAdapter
-
         reviewsCollection.visibility = View.VISIBLE
     }
 
+    override fun showAllReviews(reviews: ArrayList<ReviewViewItem>) {
+        reviewsAdapter.clear()
+        reviewsAdapter.add(reviews)
+        moreReviewsComponent.visibility = View.GONE
+    }
+
     override fun onPictureClick(pictureViewItem: PictureViewItem) {
-        //TODO("Not yet implemented")
+        Toast.makeText(rootView.context, "Not Implemented", Toast.LENGTH_SHORT).show()
+        Timber.e("OnPictureClick not implemented")
     }
 
     private fun createItems() : ArrayList<PictureViewItem> {
@@ -53,21 +87,6 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
             PictureViewItem(""),
             PictureViewItem(""),
             PictureViewItem("")
-        )
-    }
-
-    private fun createReviewItems() : ArrayList<ReviewViewItem> {
-        return arrayListOf(
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
-            ReviewViewItem("", 0.0, "", "", ""),
         )
     }
 }
