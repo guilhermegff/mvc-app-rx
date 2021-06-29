@@ -36,6 +36,7 @@ class EstablishmentController(
 
     override fun initViews() {
         viewContract.bindBackButton()
+        viewContract.bindReviewsButton()
     }
 
     private fun loadEstablishment(id: String) {
@@ -50,12 +51,10 @@ class EstablishmentController(
                                 viewContract.showEstablishment(establishmentViewItem)
                             }
                             reviews.shuffle()
-                            reviews.filterIndexed { index, _ ->
-                                index < 3
-                            }.let {
-                                viewContract.showReviews(it as ArrayList, reviews.size)
+                            reviews.filterIndexed { index, _ -> index < 3 }.let { threeReviews ->
+                                viewContract.showReviews(threeReviews as ArrayList)
                             }
-
+                            viewContract.showReviewsCount(reviews.size)
                             viewContract.showPictures()
                         }
                     }
