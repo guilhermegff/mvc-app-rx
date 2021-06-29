@@ -51,12 +51,10 @@ class EstablishmentController(
                                 viewContract.showEstablishment(establishmentViewItem)
                             }
                             reviews.shuffle()
-                            reviews.filterIndexed { index, _ ->
-                                index < 3
-                            }.let { threeReviews ->
-                                viewContract.showReviewsCount(reviews.size)
+                            reviews.filterIndexed { index, _ -> index < 3 }.let { threeReviews ->
                                 viewContract.showReviews(threeReviews as ArrayList)
                             }
+                            viewContract.showReviewsCount(reviews.size)
                             viewContract.showPictures()
                         }
                     }
