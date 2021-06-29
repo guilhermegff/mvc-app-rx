@@ -6,4 +6,8 @@ class ScreenNavigator(private val screenNavigatorListener: ScreenNavigatorListen
     override fun toDetailScreen(locationViewItem: LocationViewItem) {
         screenNavigatorListener.openDetailScreen(locationViewItem)
     }
+
+    override fun toLastScreen() {
+        screenNavigatorListener.backToLastScreen()
+    }
 }

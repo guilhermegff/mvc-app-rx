@@ -2,6 +2,7 @@ package com.project.hotmartapp.ui.establishment.view.controller
 
 import com.project.hotmartapp.core.BaseController
 import com.project.hotmartapp.core.BaseSchedulerProvider
+import com.project.hotmartapp.core.ScreenNavigator
 import com.project.hotmartapp.ui.establishment.component.reviews.ReviewViewItem
 import com.project.hotmartapp.ui.establishment.toEstablishmentViewItem
 import com.project.hotmartapp.ui.establishment.usecase.EstablishmentUseCase
@@ -10,7 +11,8 @@ import timber.log.Timber
 class EstablishmentController(
     private val establishmentUseCase: EstablishmentUseCase,
     private val schedulerProvider: BaseSchedulerProvider,
-    private val id: String
+    private val id: String,
+    private val screenNavigator: ScreenNavigator
 ) : BaseController<EstablishmentViewContract>(), EstablishmentViewContract.Listener {
 
     val reviews by lazy { createReviewItems() }
@@ -33,7 +35,7 @@ class EstablishmentController(
     }
 
     override fun initViews() {
-        //TODO("Not yet implemented")
+        viewContract.bindBackButton()
     }
 
     private fun loadEstablishment(id: String) {
@@ -65,6 +67,10 @@ class EstablishmentController(
 
     override fun onMoreReviewsClick() {
         viewContract.showAllReviews(reviews)
+    }
+
+    override fun onBackButtonClick() {
+        screenNavigator.toLastScreen()
     }
 
     private fun createReviewItems() : ArrayList<ReviewViewItem> {
