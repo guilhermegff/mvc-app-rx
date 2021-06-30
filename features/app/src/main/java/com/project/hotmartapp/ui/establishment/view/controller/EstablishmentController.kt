@@ -2,17 +2,17 @@ package com.project.hotmartapp.ui.establishment.view.controller
 
 import com.project.hotmartapp.core.BaseController
 import com.project.hotmartapp.core.BaseSchedulerProvider
-import com.project.hotmartapp.core.ScreenNavigator
+import com.project.hotmartapp.core.BaseScreenNavigator
 import com.project.hotmartapp.ui.establishment.component.reviews.ReviewViewItem
 import com.project.hotmartapp.ui.establishment.toEstablishmentViewItem
-import com.project.hotmartapp.ui.establishment.usecase.EstablishmentUseCase
+import com.project.hotmartapp.ui.establishment.usecase.BaseEstablishmentUseCase
 import timber.log.Timber
 
 class EstablishmentController(
-    private val establishmentUseCase: EstablishmentUseCase,
+    private val establishmentUseCase: BaseEstablishmentUseCase,
     private val schedulerProvider: BaseSchedulerProvider,
     private val id: String,
-    private val screenNavigator: ScreenNavigator
+    private val screenNavigator: BaseScreenNavigator
 ) : BaseController<EstablishmentViewContract>(), EstablishmentViewContract.Listener {
 
     val reviews by lazy { createReviewItems() }
@@ -56,7 +56,7 @@ class EstablishmentController(
                             }
                             reviews.shuffle()
                             reviews.filterIndexed { index, _ -> index < 3 }.let { threeReviews ->
-                                viewContract.showReviews(threeReviews as ArrayList)
+                                viewContract.showReviews(threeReviews as ArrayList<ReviewViewItem>)
                             }
                             viewContract.showReviewsCount(reviews.size)
                             viewContract.showPictures()
