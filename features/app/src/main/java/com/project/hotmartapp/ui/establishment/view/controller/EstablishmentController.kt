@@ -4,7 +4,7 @@ import com.project.hotmartapp.core.BaseController
 import com.project.hotmartapp.core.BaseSchedulerProvider
 import com.project.hotmartapp.core.BaseScreenNavigator
 import com.project.hotmartapp.ui.establishment.component.reviews.ReviewViewItem
-import com.project.hotmartapp.ui.establishment.toEstablishmentViewItem
+import com.project.hotmartapp.ui.establishment.ext.toEstablishmentViewItem
 import com.project.hotmartapp.ui.establishment.usecase.BaseEstablishmentUseCase
 import timber.log.Timber
 
