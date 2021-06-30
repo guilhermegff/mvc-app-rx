@@ -1,10 +1,11 @@
-package com.project.hotmartapp.ui.establishment
+package com.project.hotmartapp.ui.establishment.ext
 
 import com.project.hotmartapp.ui.establishment.component.establishment.EstablishmentViewItem
 import com.project.hotmartservice.model.Establishment
 
 fun Establishment.toEstablishmentViewItem() = EstablishmentViewItem(
-    name, rating, about, schedule, formatPhone(phone), formatAddress(adress))
+    name, rating, about, schedule, formatPhone(phone), formatAddress(adress)
+)
 
 private fun formatPhone(phone: String): String {
     val minimumLenghtCompletePhone = 13

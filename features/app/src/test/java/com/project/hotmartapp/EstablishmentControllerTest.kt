@@ -2,7 +2,7 @@ package com.project.hotmartapp
 
 import com.nhaarman.mockitokotlin2.*
 import com.project.hotmartapp.ui.establishment.component.reviews.ReviewViewItem
-import com.project.hotmartapp.ui.establishment.toEstablishmentViewItem
+import com.project.hotmartapp.ui.establishment.ext.toEstablishmentViewItem
 import com.project.hotmartapp.ui.establishment.usecase.BaseEstablishmentUseCase
 import com.project.hotmartapp.ui.establishment.view.controller.EstablishmentController
 import com.project.hotmartapp.ui.establishment.view.controller.EstablishmentViewContract
