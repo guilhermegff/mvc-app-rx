@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HotMartApp</string>
+    <string name="home_toolbar_title">Home</string>
+    <string name="location_thumbnail_description">Establishment Picture</string>
+    <string name="error_message">Ops, try again</string>
+    <string name="refresh_button_description">Try again button</string>
+    <string name="toolbarImage_description">Establishment Picture</string>
+    <string name="back_button_description">Back Button</string>
+    <string name="share_button_description">Share Button</string>
+    <string name="picture_description">Illustrative Picture</string>
+    <string name="pictures_text">Pictures</string>
+    <string name="about_text">About</string>
+    <string name="reviews_text">Reviews</string>
+    <string name="more_reviews">see all %1$d reviews</string>
+    <string name="monday">mon</string>
+    <string name="tuesday">tue</string>
+    <string name="wednesday">wed</string>
+    <string name="thursday">thu</string>
+    <string name="friday">fri</string>
+    <string name="saturday">sat</string>
+    <string name="sunday">sun</string>
+    <string name="and">&amp;</string>
+    <string name="to_day">to</string>
+    <string name="to_hour">til</string>
+</resources>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
@@ -19,7 +21,7 @@
             android:id="@+id/thumbnailView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/circle_fill"
+            tools:src="@drawable/circle_fill"
             android:padding="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:progressTint="@color/golden_yellow"
-        android:rating="4"
+        tools:rating="4"
         app:layout_constraintStart_toEndOf="@+id/avatarView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:text="Title"
+        tools:text="Title"
         android:textColor="@color/topaz"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/ratingBarView"
@@ -55,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="1dp"
-        android:text="Written review, long text Written review, long text Written review, long text Written review, long textWritten review, long text"
+        tools:text="Written review, long text Written review, long text Written review, long text Written review, long textWritten review, long text"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatarView"
@@ -65,7 +67,7 @@
         android:id="@+id/identificationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name, City - State"
+        tools:text="Name, City - State"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/reviewView"
         app:layout_constraintTop_toBottomOf="@+id/reviewView" />

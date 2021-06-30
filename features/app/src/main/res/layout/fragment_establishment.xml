@@ -170,7 +170,7 @@
 
                 <TextView
                     android:id="@+id/aboutTextView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="26dp"
@@ -227,7 +227,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="ver todos os 15 reviews"
+                        tools:text="ver todos os 15 reviews"
                         android:textColor="@color/topaz"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toStartOf="@+id/arrowsView"
