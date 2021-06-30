@@ -52,7 +52,7 @@ class LocationsListController(private val locationsListUseCase: BaseLocationsLis
                     }
                     it.isFailure -> { viewContract.showError() }
                 }
-            }, { Timber.e(it, "loadStores: %s", it.message) })
+            }, { Timber.e(it, "loadLocations: %s", it.message) })
             .run { disposables.add(this) }
     }
 

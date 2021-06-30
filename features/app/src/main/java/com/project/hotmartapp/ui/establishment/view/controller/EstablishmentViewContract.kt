@@ -13,7 +13,9 @@ interface EstablishmentViewContract : ObservableViewContract<EstablishmentViewCo
     }
 
     fun showEstablishment(establishmentViewItem: EstablishmentViewItem)
+    fun showContacts(establishmentViewItem: EstablishmentViewItem)
     fun showPictures()
+    fun showSchedule(establishmentViewItem: EstablishmentViewItem)
     fun showReviewsCount(total: Int)
     fun showReviews(reviews: ArrayList<ReviewViewItem>)
     fun showAllReviews(reviews: ArrayList<ReviewViewItem>)

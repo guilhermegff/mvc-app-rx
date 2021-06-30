@@ -18,7 +18,8 @@ import com.project.hotmartapp.ui.establishment.component.pictures.PicturesAdapte
 import com.project.hotmartapp.ui.establishment.component.reviews.ReviewViewItem
 import com.project.hotmartapp.ui.establishment.component.reviews.ReviewsAdapter
 import com.project.hotmartapp.ui.establishment.view.controller.EstablishmentViewContract
-import timber.log.Timber
+import com.project.hotmartservice.model.Week
+import com.project.hotmartservice.model.WorkDay
 
 class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
                         private val picturesAdapter: PicturesAdapter,
@@ -74,6 +75,16 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
         rootView.findViewById<TextView>(R.id.establishmentTitleView).text = establishmentViewItem.title
         rootView.findViewById<RatingBar>(R.id.ratingStarsView).rating = establishmentViewItem.rating.toFloat()
         rootView.findViewById<TextView>(R.id.ratingScoreView).text = establishmentViewItem.rating.toString()
+        rootView.findViewById<TextView>(R.id.aboutTextView).text = establishmentViewItem.about
+    }
+
+    override fun showContacts(establishmentViewItem: EstablishmentViewItem) {
+        rootView.findViewById<TextView>(R.id.phoneNumberView).text = establishmentViewItem.phone
+        rootView.findViewById<TextView>(R.id.addressView).text = establishmentViewItem.adress
+    }
+
+    override fun showSchedule(establishmentViewItem: EstablishmentViewItem) {
+        rootView.findViewById<TextView>(R.id.weekdayHoursView).text = formatSchedule(establishmentViewItem.schedule)
     }
 
     override fun showPictures() {
@@ -104,8 +115,51 @@ class EstablishmentView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?,
     }
 
     override fun onPictureClick(pictureViewItem: PictureViewItem) {
-        Toast.makeText(rootView.context, "Not Implemented", Toast.LENGTH_SHORT).show()
-        Timber.e("OnPictureClick not implemented")
+        //TODO("Not yet implemented")
+    }
+
+    private fun formatSchedule(schedule: Week) : String {
+        val list = ArrayList<WorkDay>(7)
+        schedule.sunday?.let { list.add(it.copy(id = 0, text = rootView.resources.getString(R.string.monday))) }
+        schedule.monday?.let { list.add(it.copy(id = 1, text = rootView.resources.getString(R.string.tuesday))) }
+        schedule.tuesday?.let { list.add(it.copy(id = 2, text = rootView.resources.getString(R.string.wednesday))) }
+        schedule.wednesday?.let { list.add(it.copy(id = 3, text = rootView.resources.getString(R.string.thursday))) }
+        schedule.thursday?.let { list.add(it.copy(id = 4, text = rootView.resources.getString(R.string.friday))) }
+        schedule.friday?.let { list.add(it.copy(id = 5, text = rootView.resources.getString(R.string.saturday))) }
+        schedule.saturday?.let { list.add(it.copy(id = 6, text = rootView.resources.getString(R.string.sunday))) }
+
+        return  getScheduleString(list)
+    }
+
+    private fun getScheduleString(list: ArrayList<WorkDay>) : String {
+        val string = StringBuilder()
+        list.distinctBy { it.open; it.close }.forEach { workDay ->
+            val daysWithSameHours = list.filter { it.open == workDay.open && it.close == workDay.close } as ArrayList
+            string.append("${writeScheduleString(daysWithSameHours)}\n")
+        }
+        return string.toString()
+    }
+
+    private fun writeScheduleString(list: ArrayList<WorkDay>) : String {
+        val string = StringBuilder()
+        when(list.size >= 2) {
+            true -> {
+                when(list.size == 2) {
+                    true -> {
+                        string.append("${list[0].text} ${rootView.resources.getString(R.string.and)} ${list[list.size - 1].text}: ${list[0].open} ${rootView.resources.getString(R.string.to_hour)} ${list[0].close}")
+                    }
+                    false -> {
+                        string.append("${list[0].text} ${rootView.resources.getString(R.string.to_day)} ${list[list.size - 1].text}: ${list[0].open} ${rootView.resources.getString(R.string.to_hour)} ${list[0].close}")
+                    }
+                }
+            }
+            false -> {
+                if(list.size == 1) {
+                    string.append("${list[0].text}: ${list[0].open} ${rootView.resources.getString(R.string.to_hour)} ${list[0].close}")
+                }
+            }
+        }
+        return string.toString()
     }
 
     private fun createItems() : ArrayList<PictureViewItem> {

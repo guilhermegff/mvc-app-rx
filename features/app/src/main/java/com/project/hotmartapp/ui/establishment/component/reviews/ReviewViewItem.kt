@@ -5,5 +5,5 @@ class ReviewViewItem(
         val rating: Double,
         val title: String,
         val review: String,
-        val location: String
+        val identification: String
     )

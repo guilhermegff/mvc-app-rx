@@ -14,15 +14,10 @@ class ReviewItemView (layoutInflater: LayoutInflater, viewGroup: ViewGroup?)
     ReviewItemViewContract {
 
     override fun bind(reviewViewItem: ReviewViewItem) {
-        val thumbnail = rootView.findViewById<ImageView>(R.id.thumbnailView)
-        val ratingStars = rootView.findViewById<RatingBar>(R.id.ratingBarView)
-        val title = rootView.findViewById<TextView>(R.id.titleView)
-        val review = rootView.findViewById<TextView>(R.id.reviewView)
-        val identificationView = rootView.findViewById<TextView>(R.id.identificationView)
-
-        thumbnail.loadImageInCircle("")
-        ratingStars.rating = reviewViewItem.rating.toFloat()
-        title.text = reviewViewItem.title
-        review.text = reviewViewItem.review
+        rootView.findViewById<ImageView>(R.id.thumbnailView).loadImageInCircle("")
+        rootView.findViewById<RatingBar>(R.id.ratingBarView).rating = reviewViewItem.rating.toFloat()
+        rootView.findViewById<TextView>(R.id.titleView).text = reviewViewItem.title
+        rootView.findViewById<TextView>(R.id.reviewView).text = reviewViewItem.review
+        rootView.findViewById<TextView>(R.id.identificationView).text = reviewViewItem.identification
     }
 }
