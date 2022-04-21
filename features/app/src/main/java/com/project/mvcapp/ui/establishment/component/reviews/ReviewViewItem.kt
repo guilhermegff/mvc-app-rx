@@ -1,6 +1,6 @@
 package com.project.mvcapp.ui.establishment.component.reviews
 
-class ReviewViewItem(
+data class ReviewViewItem(
         val avatar: String,
         val rating: Double,
         val title: String,

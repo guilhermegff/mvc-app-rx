@@ -30,6 +30,7 @@ class LocationsListController(private val locationsListUseCase: BaseLocationsLis
 
     override fun onStop() {
         viewContract.unregisterListener(this)
+        clearDisposables()
     }
 
     override fun initViews() {
