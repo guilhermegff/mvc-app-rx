@@ -1,0 +1,28 @@
+[versions]
+glideVersion = "4.12.0"
+timberVersion = "4.7.1"
+rxJavaVersion = "2.2.9"
+materialVersion = "1.5.0"
+okhttp3Version = "3.14.9"
+rxAndroidVersion = "2.1.1"
+retrofitVersion = "2.9.0"
+coroutinesVersion = "1.6.1"
+adapterRxJava2Version = "2.5.0"
+androidxCoreKtxVersion = "1.7.0"
+androidxAppCompatVersion = "1.4.1"
+androidxConstraintLayoutVersion = "2.1.3"
+
+[libraries]
+rxJava = { group = "io.reactivex.rxjava2", name = "rxjava", version.ref = "rxJavaVersion" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3Version" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideVersion" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }
+coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCoreKtxVersion" }
+rxAndroid = { group = "io.reactivex.rxjava2", name = "rxandroid", version.ref = "rxAndroidVersion" }
+retrofitCore = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
+appCompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompatVersion" }
+converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
+loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3Version" }
+adapterRxJava2 = { group = "com.squareup.retrofit2", name = "adapter-rxjava2", version.ref = "adapterRxJava2Version" }
+constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidxConstraintLayoutVersion" }

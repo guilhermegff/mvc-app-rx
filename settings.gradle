@@ -1,3 +1,11 @@
 rootProject.name = "MvcApp"
 include ':apis:service'
 include ':features:app'
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        testLibs {
+            from(files("/gradle/testlibs.versions.toml"))
+        }
+    }
+}
